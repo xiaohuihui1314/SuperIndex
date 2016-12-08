@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 class Index extends React.Component {
     render() {
         return (
@@ -9,10 +10,10 @@ class Index extends React.Component {
                 </section>
                 <section className="section-content">
                     <p>
-                        <button type="button" className="btn login-btn">登录</button>
+                        <Link to="/login" type="button" className="btn-a login-btn">登录</Link>
                     </p>
                     <p>
-                        <button type="button" className="btn register-btn">注册</button>
+                        <Link  to="/register" className="btn-a register-btn">注册</Link>
                     </p>
                 </section>
             </div>
