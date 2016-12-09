@@ -23,7 +23,23 @@ function startLogin(loginData) {
 }
 function endLogin(loginData) {
     return{
-        type:LOGINSTART,
+        type:LOGINEND,
         loginData
+    }
+}
+// 远程获取数据
+function fetchRequest(name) {
+    return dispatch=> {
+        dispatch(startLogin(name));
+        return fetch(`https://www.reddit.com/r/${name}.json`)
+            .then(response => response.json())
+            .then(json => dispatch(endLogin(name, json)));
+    }
+}
+
+// 触发获取数据
+export  function requireRequset(name){
+    return (dispatch)=>{
+        dispatch(fetchRequest(name))
     }
 }
