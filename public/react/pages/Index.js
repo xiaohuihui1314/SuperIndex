@@ -1,6 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {Login,requireRequset} from '../redux/actions/index';
 class Index extends React.Component {
+    //初始化渲染后触发
+    componentDidMount() {
+        console.log('执行componentDidMount');
+        const {loginRequest} = this.props;
+        console.log(this.props)
+        this.props.requireRequset(loginRequest);
+
+    }
     render() {
         return (
             <div>
@@ -20,6 +30,23 @@ class Index extends React.Component {
         )
     }
 }
-export {
-    Index as default
+function mapStateToProps(state) {
+    console.log("SSSSSSSSSSSSSSSSs");
+    console.log(state);
+    const {loginRequest,postBy} =state;
+    const {isFetching,items: posts}=postBy[loginRequest]||{isFetching: true, items: []};
+    return {
+        loginRequest,
+        isFetching,
+        posts
+    }
 }
+function select(dispatch) {
+    return {
+        requireRequset:(e)=>{
+            dispatch(requireRequset(e))
+        }
+    }
+
+}
+export default connect(mapStateToProps, select)(Index);

@@ -14,26 +14,27 @@ export function Register(register) {
         register
     }
 }
-function startLogin(loginData) {
+function startLogin(login) {
     return{
         type:LOGINSTART,
-        loginData
+        login
     }
 
 }
-function endLogin(loginData) {
+function endLogin(login,json) {
     return{
         type:LOGINEND,
-        loginData
+        login:login,
+        loginData:json
     }
 }
 // 远程获取数据
-function fetchRequest(name) {
+function fetchRequest(login) {
     return dispatch=> {
-        dispatch(startLogin(name));
-        return fetch(`https://www.reddit.com/r/${name}.json`)
+        dispatch(startLogin(login));
+        return fetch(`https://www.reddit.com/r/${login}.json`)
             .then(response => response.json())
-            .then(json => dispatch(endLogin(name, json)));
+            .then(json => dispatch(endLogin(login, json)));
     }
 }
 

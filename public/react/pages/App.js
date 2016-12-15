@@ -16,10 +16,10 @@ ReactDOM.render(
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
             </Router>
-        </Provider>
+         </Provider>
     ),
-    document.getElementById("app"), ()=> {
-        setInterval(function () {
+    document.getElementById("app"),()=> {
+        setInterval(()=>{
             document.getElementsByClassName("gorgeous")[0].style.transform = "scaleX(." + Math.ceil(Math.random() * 10) + ")"
         }, 120);
     }

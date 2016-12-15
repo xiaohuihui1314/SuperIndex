@@ -10,7 +10,7 @@ import {
 function loginRequest(state = 'reactjs', action) {
     switch (action.type) {
         case LOGIN:
-            return action.name;
+            return action.login;
         default:
             return state;
     }
@@ -20,7 +20,9 @@ function requestFetch(state = {
     isFetching: false,
     //内容
     states:false,
-    userName:null
+    userName:null,
+    //内容
+    items: []
 }, action) {
     switch (action.type) {
         case LOGINSTART:
@@ -33,7 +35,8 @@ function requestFetch(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 states:false,
-                userName:null
+                userName:null,
+                items: action.posts
             });
     }
 }
@@ -42,8 +45,10 @@ function postBy(state = {}, action) {
     switch (action.type) {
         case LOGINSTART:
         case LOGINEND:
+            console.log("postBypostBypostBypostBypostBypostBypostBypostBypostBypostBypostBy")
+            console.log(action);
             return Object.assign({}, state, {
-                [action.name]: requestFetch(state = {}, action)
+                [action.login]: requestFetch(state = {}, action)
             });
         default:
             return state;
