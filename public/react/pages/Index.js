@@ -12,6 +12,8 @@ class Index extends React.Component {
 
     }
     render() {
+        console.log("88888888888");
+        console.log(this.props);
         return (
             <div>
                 <section className="section-navbar">
@@ -31,9 +33,10 @@ class Index extends React.Component {
     }
 }
 function mapStateToProps(state) {
-    console.log("SSSSSSSSSSSSSSSSs");
+    console.log("statestatestatestatestatestatestatestatestatestatestatestatestate");
     console.log(state);
     const {loginRequest,postBy} =state;
+    console.log(state);
     const {isFetching,items: posts}=postBy[loginRequest]||{isFetching: true, items: []};
     return {
         loginRequest,

@@ -35,8 +35,8 @@ function requestFetch(state = {
             return Object.assign({}, state, {
                 isFetching: false,
                 states:false,
-                userName:null,
-                items: action.posts
+                userName:"小明",
+                items: action.loginData
             });
     }
 }
@@ -45,8 +45,6 @@ function postBy(state = {}, action) {
     switch (action.type) {
         case LOGINSTART:
         case LOGINEND:
-            console.log("postBypostBypostBypostBypostBypostBypostBypostBypostBypostBypostBy")
-            console.log(action);
             return Object.assign({}, state, {
                 [action.login]: requestFetch(state = {}, action)
             });
