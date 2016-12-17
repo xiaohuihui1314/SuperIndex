@@ -2,8 +2,8 @@ var mongoose =require("mongoose");
 require("./users");
 var User=mongoose.model("User");
 var user =new User({
-    userName:"小辉辉",
-    passWord:"123456",
+    userName:"222",
+    passWord:"222",
     role:1
 });
 

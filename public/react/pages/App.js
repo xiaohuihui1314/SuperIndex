@@ -19,8 +19,8 @@ ReactDOM.render(
          </Provider>
     ),
     document.getElementById("app"),()=> {
-        setInterval(()=>{
+    /*    setInterval(()=>{
             document.getElementsByClassName("gorgeous")[0].style.transform = "scaleX(." + Math.ceil(Math.random() * 10) + ")"
-        }, 120);
+        }, 120);*/
     }
 );

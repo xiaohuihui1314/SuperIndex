@@ -3,16 +3,20 @@ var mongoose = require("mongoose");
 require("../mongodb/users/users");
 var User = mongoose.model("User");
 var router = express.Router();
-
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 /* GET home page. */
 router
     .get('/', function (req, res, next) {
         res.render('index');
     })
-    .post('/login', function (req, res, next) {
+    .post('/login',multipartMiddleware,function (req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "POST");
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
+        res.header("Content-Type", "application/json;charset=utf-8");
+        console.log(req.body);
+        console.log(req.body.firstName);
         var userName = req.body.userName;
         var passWord = req.body.passWord;
         var cond = {
@@ -29,7 +33,11 @@ router
             }
             if (docs) {
                 console.log(docs);
-                res.json(docs);
+                var data={
+                    role:docs.role,
+                    userName:docs.userName
+                };
+                res.json(data);
             }
 
         });

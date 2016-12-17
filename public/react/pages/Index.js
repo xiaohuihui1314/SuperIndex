@@ -1,14 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {Login,requireRequset} from '../redux/actions/index';
+import {requireRequset} from '../redux/actions/login';
+import Login from './Login';
 class Index extends React.Component {
     //初始化渲染后触发
     componentDidMount() {
-        console.log('执行componentDidMount');
+        console.log('11111111111');
         const {loginRequest} = this.props;
         console.log(this.props)
-        this.props.requireRequset(loginRequest);
+        // this.props.requireRequset(loginRequest);
 
     }
     render() {
@@ -27,13 +28,14 @@ class Index extends React.Component {
                     <p>
                         <Link  to="/register" className="btn-a register-btn">注册</Link>
                     </p>
+                    <Login/>
                 </section>
             </div>
         )
     }
 }
 function mapStateToProps(state) {
-    console.log("statestatestatestatestatestatestatestatestatestatestatestatestate");
+    console.log("statestatestatestatestatestatestatestatestatestatestatestatestate1");
     console.log(state);
     const {loginRequest,postBy} =state;
     console.log(state);

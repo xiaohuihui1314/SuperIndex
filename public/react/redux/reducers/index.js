@@ -1,13 +1,18 @@
 import {combineReducers} from 'redux';
+/*import {
+    LOGIN,
+    REGISTER,
+    LOGINSTART,
+    LOGINEND,
+} from '../actions/index';*/
 import {
     LOGIN,
     REGISTER,
     LOGINSTART,
     LOGINEND,
-} from '../actions/index';
+} from '../actions/login';
 
-
-function loginRequest(state = 'reactjs', action) {
+function loginRequest(state = {}, action) {
     switch (action.type) {
         case LOGIN:
             return action.login;
@@ -19,24 +24,21 @@ function requestFetch(state = {
     //是否正在获取最新
     isFetching: false,
     //内容
-    states:false,
+    role:null,
     userName:null,
-    //内容
-    items: []
 }, action) {
     switch (action.type) {
         case LOGINSTART:
             return Object.assign({}, state, {
                 isFetching: true,
-                states:false,
+                role:null,
                 userName:null
             });
         case LOGINEND:
             return Object.assign({}, state, {
                 isFetching: false,
-                states:false,
-                userName:"小明",
-                items: action.loginData
+                role:action.loginData.role,
+                userName:action.loginData.userName
             });
     }
 }
@@ -46,12 +48,12 @@ function postBy(state = {}, action) {
         case LOGINSTART:
         case LOGINEND:
             return Object.assign({}, state, {
-                [action.login]: requestFetch(state = {}, action)
+                user: requestFetch(state = {}, action)
             });
         default:
             return state;
     }
 }
 
-const Todo = combineReducers({loginRequest, postBy});
+const Todo = combineReducers({postBy});
 export default Todo;
