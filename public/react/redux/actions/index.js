@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const LOGINSTART="LOGINSTART";
