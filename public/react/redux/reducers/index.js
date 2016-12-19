@@ -1,18 +1,15 @@
 import {combineReducers} from 'redux';
-/*import {
-    LOGIN,
-    REGISTER,
-    LOGINSTART,
-    LOGINEND,
-} from '../actions/index';*/
+
 import {
     LOGIN,
-    REGISTER,
     LOGINSTART,
     LOGINEND,
 } from '../actions/login';
 
-function loginRequest(state = {}, action) {
+function loginRequest(state ={}, action) {
+    console.log("4444444444444")
+    console.log(state)
+    console.log(action)
     switch (action.type) {
         case LOGIN:
             return action.login;
@@ -27,6 +24,8 @@ function requestFetch(state = {
     role:null,
     userName:null,
 }, action) {
+    console.log("9999999999999999999999");
+    console.log(action);
     switch (action.type) {
         case LOGINSTART:
             return Object.assign({}, state, {
@@ -47,13 +46,15 @@ function postBy(state = {}, action) {
     switch (action.type) {
         case LOGINSTART:
         case LOGINEND:
+            console.log("888888888888888")
+            console.log(action)
             return Object.assign({}, state, {
-                user: requestFetch(state = {}, action)
+                [action.what]: requestFetch(state = {}, action)
             });
         default:
             return state;
     }
 }
 
-const Todo = combineReducers({postBy});
+const Todo = combineReducers({loginRequest,postBy});
 export default Todo;

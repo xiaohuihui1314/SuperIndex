@@ -1,5 +1,14 @@
+export const LOGIN = "LOGIN";
 export const LOGINSTART = "LOGINSTART";
 export const LOGINEND = "LOGINEND";
+
+export function userLogin(login) {
+    return {
+        type: LOGIN,
+        what:"login",
+        login
+    }
+}
 function startLogin(login) {
     return {
         type: LOGINSTART,

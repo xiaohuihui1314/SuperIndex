@@ -1,15 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {requireRequset} from '../redux/actions/login';
+import {userLogin,requireRequset} from '../redux/actions/login';
 class Login extends React.Component {
     //初始化渲染后触发
-    componentDidMount() {
-        console.log('22222222');
-        const {loginRequest} = this.props;
-        console.log(this.props)
-        // this.props.requireRequset(loginRequest);
+    componentWillReceiveProps(nextProps) {
+        console.log('初始化渲染后触发');
+        const {loginRequest}=nextProps;
 
+        this.props.requireRequset(loginRequest);
     }
     loginSubmit(e){
         e.preventDefault();
@@ -20,16 +19,16 @@ class Login extends React.Component {
             userName:this.refs.userName.value,
             passWord:this.refs.userPwd.value
         }
-        this.props.requireRequset(a);   
+        this.props.userLogin(a);
     }
     render() {
-        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        console.log(this.props);
+      /*  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        console.log(this.props);*/
         return (
             <div>
                 <form onSubmit={this.loginSubmit.bind(this)}>
-                    <input ref="userName" type="text" placeholder="用户名"/>
-                    <input ref="userPwd" type="password" placeholder="密码"/>
+                    <input ref="userName" type="text" placeholder="用户名" defaultValue="111"/>
+                    <input ref="userPwd" type="password" placeholder="密码" defaultValue="111" />
                     <button type="submit">登录</button>
                 </form>
             </div>
@@ -39,10 +38,11 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     console.log("statestatestatestatestatestatestatestatestatestatestatestatestate2");
     console.log(state);
-    const {postBy} =state;
-    console.log(postBy);
-    const {isFetching,user: posts}=postBy||{isFetching: true, user: []};
+    const {loginRequest,postBy} =state;
+
+    const {isFetching,login: posts}=postBy[loginRequest]||{isFetching: true, login: []};
     return {
+        loginRequest,
         isFetching,
         posts,
 
@@ -50,6 +50,9 @@ function mapStateToProps(state) {
 }
 function select(dispatch) {
     return {
+        userLogin:(e)=>{
+            dispatch(userLogin(e))
+        },
         requireRequset:(e)=>{
             dispatch(requireRequset(e))
         }

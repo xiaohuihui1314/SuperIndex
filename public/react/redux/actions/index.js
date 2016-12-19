@@ -3,7 +3,7 @@ export const LOGIN = "LOGIN";
 export const REGISTER = "REGISTER";
 export const LOGINSTART="LOGINSTART";
 export const LOGINEND="LOGINEND";
-export function Login(login) {
+export function userLogin(login) {
     return {
         type: LOGIN,
         login
