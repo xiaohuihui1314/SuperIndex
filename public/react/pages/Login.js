@@ -1,29 +1,20 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {userLogin,requireRequset} from '../redux/actions/login';
+import * as loginAction from '../redux/actions/login';
 class Login extends React.Component {
-    //初始化渲染后触发
-    componentWillReceiveProps(nextProps) {
-        console.log('初始化渲染后触发');
-        const {loginRequest}=nextProps;
-
-        this.props.requireRequset(loginRequest);
-    }
     loginSubmit(e){
         e.preventDefault();
-        console.log(this.refs.userName.value)
-        console.log(this.refs.userPwd.value)
-        const { requireRequset } = this.props;
         var a ={
             userName:this.refs.userName.value,
             passWord:this.refs.userPwd.value
         }
-        this.props.userLogin(a);
+        this.props.requireRequset(a);
     }
     render() {
-      /*  console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        console.log(this.props);*/
+        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.loginSubmit.bind(this)}>
@@ -38,25 +29,17 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     console.log("statestatestatestatestatestatestatestatestatestatestatestatestate2");
     console.log(state);
-    const {loginRequest,postBy} =state;
+    const {postBy} =state;
 
-    const {isFetching,login: posts}=postBy[loginRequest]||{isFetching: true, login: []};
+    // const {isFetching,login: posts}=postBy["user"];
     return {
-        loginRequest,
-        isFetching,
-        posts,
+        postBy,
+        // posts,
 
     }
 }
 function select(dispatch) {
-    return {
-        userLogin:(e)=>{
-            dispatch(userLogin(e))
-        },
-        requireRequset:(e)=>{
-            dispatch(requireRequset(e))
-        }
-    }
+    return bindActionCreators(loginAction,dispatch)
 
 }
 export default connect(mapStateToProps,select)(Login);

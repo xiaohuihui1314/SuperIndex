@@ -2,13 +2,6 @@ export const LOGIN = "LOGIN";
 export const LOGINSTART = "LOGINSTART";
 export const LOGINEND = "LOGINEND";
 
-export function userLogin(login) {
-    return {
-        type: LOGIN,
-        what:"login",
-        login
-    }
-}
 function startLogin(login) {
     return {
         type: LOGINSTART,
@@ -16,10 +9,10 @@ function startLogin(login) {
     }
 
 }
-function endLogin( json) {
+function endLogin(login,json) {
     return {
         type: LOGINEND,
-        // login: login,
+        login: login,
         loginData: json
     }
 }
@@ -27,9 +20,7 @@ function endLogin( json) {
 // 远程获取数据
 function fetchRequest(name) {
     return dispatch=> {
-        dispatch(startLogin());
-        console.log("ACTIONACTIONACTIONACTIONACTIONACTION");
-        console.log(name);
+        dispatch(startLogin(name));
         return fetch("http://localhost:3000/login", {
             method: "POST",
             mode: 'cors',
@@ -40,13 +31,11 @@ function fetchRequest(name) {
             body: `userName=${name.userName}&passWord=${name.passWord}`
         })
             .then(response => response.json())
-            .then(json => dispatch(endLogin( json)));
+            .then(json => dispatch(endLogin(name,json)));
     }
 }
-
 // 触发获取数据
 export function requireRequset(name) {
-    console.log(name);
     return (dispatch)=> {
         dispatch(fetchRequest(name))
     }
