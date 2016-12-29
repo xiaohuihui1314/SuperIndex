@@ -1,6 +1,8 @@
 import React from 'react';
+// import 'antd/dist/antd.css';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import  {Button } from 'antd';
 
 import * as loginAction from '../redux/actions/login';
 class Login extends React.Component {
@@ -22,6 +24,10 @@ class Login extends React.Component {
                     <input ref="userPwd" type="password" placeholder="密码" defaultValue="111" />
                     <button type="submit">登录</button>
                 </form>
+                <Button type="primary">Primary</Button>
+                <Button>Default</Button>
+                <Button type="ghost">Ghost</Button>
+                <Button type="dashed">Dashed</Button>
             </div>
         )
     }

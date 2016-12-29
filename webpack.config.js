@@ -13,9 +13,9 @@ module.exports = {
         path: './js/',
         filename: '[name].js'
     },
-/*
-    devtool:'source-map',
-*/
+    /*
+     devtool:'source-map',
+     */
     module: {
         //加载器配置
         loaders: [
@@ -34,11 +34,15 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel'
             },
-          {
+            {
                 test: /\.jsx?$/,
                 loader: 'babel', // 'babel-loader' is also a legal name to reference
                 query: {
-                    presets: ['react', 'es2015']
+                    presets: ['react', 'es2015'],
+                    plugins: [
+                        ['import', [{libraryName: "antd", style: 'css'}]],
+                        ['import', [{libraryName: "antd", style: true}]],  // import less
+                    ],
                 }
             },
             //.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
@@ -54,24 +58,30 @@ module.exports = {
                 test: /\.css$/,
                 loaders: ['style', 'css']
             },
-         /*   {
-                test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
-                loader: 'file-loader?name=[hash].[ext]'
-            },*/
+            /*   {
+             test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
+             loader: 'file-loader?name=[hash].[ext]'
+             },*/
             //npm install url-loader --save-dev
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url?limit=819200&name=[hash].[ext]'
+            },
+            {
+                test: /\.less$/,
+                loader: 'style-loader!css-loader!less-loader'
             }
+
             /*  {react1: /\.css$/, loader: 'style-loader!css-loader'},
              {react1: /\.js$/, loader: 'jsx-loader?harmony'},
              {react1: /\.scss$/, loader: 'style!css!sass?sourceMap'},
              {react1: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}*/
         ]
     },
+
     // //其它解决方案配置
     resolve: {
-        extensions: ['', '.js', '.json', '.css','.scss'],
+        extensions: ['', '.js', '.json', '.css', '.scss', ".less"],
     }
     // resolve: {
     //     root: 'E:/github/flux-example/src', //绝对路径
