@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Index from './Index';
 import Login from './Login';
-import Register from './Register';
+import NormalLoginForm from './Register';
 import '../css/index';
+import '../../../node_modules/antd/dist/antd';
 import {Provider} from 'react-redux';
 import configureStore from '../redux/store/index';
 const store = configureStore();
@@ -14,7 +15,7 @@ ReactDOM.render(
             <Router history={hashHistory}>
                 <Route path="/" component={Index}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/register" component={Register}/>
+                <Route path="/register" component={NormalLoginForm}/>
             </Router>
          </Provider>
     ),

@@ -2,7 +2,7 @@ import React from 'react';
 // import 'antd/dist/antd.css';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import  {Button } from 'antd';
+import  {Button,DatePicker } from 'antd';
 
 import * as loginAction from '../redux/actions/login';
 class Login extends React.Component {
@@ -25,9 +25,8 @@ class Login extends React.Component {
                     <button type="submit">登录</button>
                 </form>
                 <Button type="primary">Primary</Button>
-                <Button>Default</Button>
-                <Button type="ghost">Ghost</Button>
-                <Button type="dashed">Dashed</Button>
+
+                <DatePicker />
             </div>
         )
     }

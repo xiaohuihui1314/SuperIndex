@@ -1,6 +1,12 @@
 /**
  * Created by Administrator on 2016/10/26.
  */
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+// multiple extract instances
+// let extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
+let extractLESS = new ExtractTextPlugin('./ant.less');
+
 module.exports = {
     /*    //插件项
      plugins: [commonsPlugin],*/
@@ -13,6 +19,7 @@ module.exports = {
         path: './js/',
         filename: '[name].js'
     },
+    watch:true,
     /*
      devtool:'source-map',
      */
@@ -32,16 +39,19 @@ module.exports = {
              */
             {
                 test: /\.js$/,
-                loader: 'babel'
+                loader: 'babel',
+                exclude:'/node_modules/'
+
             },
             {
                 test: /\.jsx?$/,
                 loader: 'babel', // 'babel-loader' is also a legal name to reference
+                exclude:'/node_modules/',
                 query: {
                     presets: ['react', 'es2015'],
                     plugins: [
-                        ['import', [{libraryName: "antd", style: 'css'}]],
-                        ['import', [{libraryName: "antd", style: true}]],  // import less
+                        // ['import', [{libraryName: "antd", style: 'css'}]],
+                        ['import', [{libraryName: "antd", style: false}]],  // import less
                     ],
                 }
             },
@@ -52,11 +62,13 @@ module.exports = {
             //cnpm install node-sass
             {
                 test: /\.scss$/,
-                loader: 'style!css!sass'
+                loader: 'style!css!sass',
+                exclude:'/node_modules/'
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css']
+                loaders: ['style', 'css'],
+                exclude:'/node_modules/'
             },
             /*   {
              test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
@@ -65,11 +77,13 @@ module.exports = {
             //npm install url-loader --save-dev
             {
                 test: /\.(png|jpg)$/,
-                loader: 'url?limit=819200&name=[hash].[ext]'
+                loader: 'url?limit=819200&name=[hash].[ext]',
+                exclude:'/node_modules/'
             },
             {
                 test: /\.less$/,
-                loader: 'style-loader!css-loader!less-loader'
+                loader: extractLESS.extract(['css','css!less']),
+                exclude:'/node_modules/'
             }
 
             /*  {react1: /\.css$/, loader: 'style-loader!css-loader'},
@@ -78,6 +92,9 @@ module.exports = {
              {react1: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}*/
         ]
     },
+    plugins: [
+        extractLESS
+    ],
 
     // //其它解决方案配置
     resolve: {
