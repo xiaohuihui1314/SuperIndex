@@ -4,7 +4,7 @@ import Index from './Index';
 import Login from './Login';
 import NormalLoginForm from './Register';
 import '../css/index';
-import '../../../node_modules/antd/dist/antd';
+
 import {Provider} from 'react-redux';
 import configureStore from '../redux/store/index';
 const store = configureStore();

@@ -1,5 +1,4 @@
 import React from 'react';
-// import 'antd/dist/antd.css';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import  {Button,DatePicker } from 'antd';

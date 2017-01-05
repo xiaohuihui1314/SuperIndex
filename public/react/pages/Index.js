@@ -17,6 +17,7 @@ class Index extends React.Component {
         console.log(this.props);
         return (
             <div>
+
                 <section className="section-navbar">
                     <h1>Welcome to SuperIndex</h1>
                     <div className="gorgeous"></div>

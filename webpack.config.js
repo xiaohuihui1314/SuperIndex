@@ -1,11 +1,8 @@
 /**
  * Created by Administrator on 2016/10/26.
  */
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-// multiple extract instances
-// let extractCSS = new ExtractTextPlugin('stylesheets/[name].css');
-let extractLESS = new ExtractTextPlugin('./ant.less');
+
 
 module.exports = {
     /*    //插件项
@@ -37,23 +34,19 @@ module.exports = {
              //# npm install --save-dev babel-preset-stage-2
              //# npm install --save-dev babel-preset-stage-3
              */
-            {
-                test: /\.js$/,
-                loader: 'babel',
-                exclude:'/node_modules/'
 
-            },
             {
-                test: /\.jsx?$/,
+                test: /\.(jsx|js)?$/,
                 loader: 'babel', // 'babel-loader' is also a legal name to reference
-                exclude:'/node_modules/',
+                // exclude:'/node_modules/',
                 query: {
                     presets: ['react', 'es2015'],
                     plugins: [
-                        // ['import', [{libraryName: "antd", style: 'css'}]],
-                        ['import', [{libraryName: "antd", style: false}]],  // import less
+                          ['import', [{libraryName: "antd", style: 'css'}]],
+                        // ['import', [{libraryName: "antd", style: true}]],  // import less
                     ],
-                }
+                },
+                cacheDirectory: true
             },
             //.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
             //npm install node-sass --save-dev
@@ -63,27 +56,28 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: 'style!css!sass',
-                exclude:'/node_modules/'
+                // exclude:'/node_modules/'
             },
             {
                 test: /\.css$/,
                 loaders: ['style', 'css'],
-                exclude:'/node_modules/'
+                // exclude:'/node_modules/'
             },
-            /*   {
+               {
              test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
              loader: 'file-loader?name=[hash].[ext]'
-             },*/
+             },
             //npm install url-loader --save-dev
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url?limit=819200&name=[hash].[ext]',
-                exclude:'/node_modules/'
+                // exclude:'/node_modules/'
             },
             {
                 test: /\.less$/,
-                loader: extractLESS.extract(['css','css!less']),
-                exclude:'/node_modules/'
+                loaders: "style!css!less",
+                // loader: extractLESS.extract(['css','css!less']),
+                // exclude:'/node_modules/'
             }
 
             /*  {react1: /\.css$/, loader: 'style-loader!css-loader'},
@@ -92,9 +86,7 @@ module.exports = {
              {react1: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}*/
         ]
     },
-    plugins: [
-        extractLESS
-    ],
+
 
     // //其它解决方案配置
     resolve: {
