@@ -1,35 +1,55 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import  {Button,DatePicker } from 'antd';
-
+import {Form, Icon, Input, Button, Select} from 'antd';
+const FormItem = Form.Item;
+// this.props.requireRequset(a);
 import * as loginAction from '../redux/actions/login';
-class Login extends React.Component {
-    loginSubmit(e){
+import {hashHistory } from 'react-router';
+class LoginForm extends React.Component {
+    loginSubmit(e) {
         e.preventDefault();
-        var a ={
-            userName:this.refs.userName.value,
-            passWord:this.refs.userPwd.value
-        }
-        this.props.requireRequset(a);
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+                this.props.requireRequset(values);
+                const path = "/";
+                hashHistory.push(path)
+            }
+        });
+
     }
+
     render() {
         console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         console.log(this.props);
+        const {getFieldDecorator} =this.props.form;
         return (
-            <div>
-                <form onSubmit={this.loginSubmit.bind(this)}>
-                    <input ref="userName" type="text" placeholder="用户名" defaultValue="111"/>
-                    <input ref="userPwd" type="password" placeholder="密码" defaultValue="111" />
-                    <button type="submit">登录</button>
-                </form>
-                <Button type="primary">Primary</Button>
 
-                <DatePicker />
-            </div>
+            <Form onSubmit={this.loginSubmit.bind(this)} className="login-form">
+                <FormItem>
+                    {getFieldDecorator('userName', {
+                        rules: [{ required: true, message: '请输入用户名!' }],
+                    })(
+                    <Input   type="text" placeholder="用户名"  />
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('passWord', {
+                        rules: [{ required: true, message: '请输入密码!' }],
+                    })(
+                    <Input   type="password" placeholder="密码"  />
+                    )}
+                </FormItem>
+                <FormItem>
+                    <Button type="primary"  className="login-form-button" htmlType="submit">登录</Button>
+                </FormItem>
+            </Form>
+
         )
     }
 }
+const Login = Form.create()(LoginForm);
 function mapStateToProps(state) {
     console.log("statestatestatestatestatestatestatestatestatestatestatestatestate2");
     console.log(state);
@@ -43,7 +63,7 @@ function mapStateToProps(state) {
     }
 }
 function select(dispatch) {
-    return bindActionCreators(loginAction,dispatch)
+    return bindActionCreators(loginAction, dispatch)
 
 }
-export default connect(mapStateToProps,select)(Login);
+export default connect(mapStateToProps, select)(Login);

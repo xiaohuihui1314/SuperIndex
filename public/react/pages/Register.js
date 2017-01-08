@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox,DatePicker,Select} from 'antd';
+import { Form, Icon, Input, Button,Select} from 'antd';
 const FormItem = Form.Item;
 class Login extends React.Component {
     handleSubmit(e) {
@@ -37,17 +37,7 @@ class Login extends React.Component {
                         <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
                     )}
                 </FormItem>
-               {/* <FormItem
-                label="create date"
-                labelCol={{span:8}}
-                wrapperCol={{span:16}}
-                >
-                    {getFieldDecorator('date', {
-                        rules: [{ required: true, message: '请选择生日!' }],
-                    })(
-                        <DatePicker   type="text" placeholder="生日" />
-                    )}
-                </FormItem>*/}
+
                 <FormItem>
                     {getFieldDecorator('phone', {
                         rules: [{ required: true, message: 'Please input your phone number!' }],
@@ -56,13 +46,6 @@ class Login extends React.Component {
                     )}
                 </FormItem>
                 <FormItem>
-                 {/*   {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
-                    <a className="login-form-forgot">Forgot password</a>*/}
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Register
                     </Button>
@@ -71,7 +54,7 @@ class Login extends React.Component {
         );
     }
 }
- const NormalLoginForm = Form.create()(Login);
+const NormalLoginForm = Form.create()(Login);
 
 export {
     NormalLoginForm as default
