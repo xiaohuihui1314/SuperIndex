@@ -20,8 +20,6 @@ ReactDOM.render(
          </Provider>
     ),
     document.getElementById("app"),()=> {
-    /*    setInterval(()=>{
-            document.getElementsByClassName("gorgeous")[0].style.transform = "scaleX(." + Math.ceil(Math.random() * 10) + ")"
-        }, 120);*/
+
     }
 );
