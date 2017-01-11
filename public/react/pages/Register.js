@@ -13,6 +13,7 @@ class Login extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         const { getFieldDecorator } = this.props.form;
         const prefixSelector = getFieldDecorator('prefix', {
             initialValue: '+86',
@@ -49,6 +50,7 @@ class Login extends React.Component {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Register
                     </Button>
+
                 </FormItem>
             </Form>
         );

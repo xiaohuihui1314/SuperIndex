@@ -5,7 +5,7 @@ import {Form, Icon, Input, Button, Select} from 'antd';
 const FormItem = Form.Item;
 // this.props.requireRequset(a);
 import * as loginAction from '../redux/actions/login';
-import {hashHistory } from 'react-router';
+import {hashHistory,Link} from 'react-router';
 class LoginForm extends React.Component {
     loginSubmit(e) {
         e.preventDefault();
@@ -13,19 +13,23 @@ class LoginForm extends React.Component {
             if (!err) {
                 console.log('Received values of form: ', values);
                 this.props.requireRequset(values);
-                const path = "/";
-                hashHistory.push(path)
+
             }
         });
-
     }
-
+    componentWillReceiveProps(nextProps){
+        console.log("componentWillReceiveProps1");
+        console.log(nextProps.postBy.loginState);
+        if(nextProps.postBy.loginState){
+             const path = "/";
+             hashHistory.push(path);
+        }
+        console.log("componentWillReceiveProps2");
+    }
     render() {
-        console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         console.log(this.props);
         const {getFieldDecorator} =this.props.form;
         return (
-
             <Form onSubmit={this.loginSubmit.bind(this)} className="login-form">
                 <FormItem>
                     {getFieldDecorator('userName', {
@@ -43,6 +47,7 @@ class LoginForm extends React.Component {
                 </FormItem>
                 <FormItem>
                     <Button type="primary"  className="login-form-button" htmlType="submit">登录</Button>
+                    <Link to="/">首页</Link>
                 </FormItem>
             </Form>
 

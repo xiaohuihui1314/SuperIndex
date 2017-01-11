@@ -12,12 +12,14 @@ function requestFetch(state = {}, action) {
     switch (action.type) {
         case LOGINSTART:
             return Object.assign({}, state, {
+                loginState:false,
                 isFetching: true,
                 role:null,
                 userName:null
             });
         case LOGINEND:
             return Object.assign({}, state, {
+                loginState:true,
                 isFetching: false,
                 role:action.loginData.role,
                 userName:action.loginData.userName
@@ -29,7 +31,8 @@ function requestFetch(state = {}, action) {
 
 function postBy(state = {
     //是否正在获取最新
-    isFetching: false,
+    loginState:false,
+    isFetching: true,
     //内容
     role:null,
     userName:null
