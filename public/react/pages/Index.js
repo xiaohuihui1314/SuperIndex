@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {requireRequset} from '../redux/actions/login';
-import {Menu, Icon,Carousel } from 'antd';
+import { requireRequset} from '../redux/actions/login';
+import {Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
@@ -55,17 +55,7 @@ class Index extends React.Component {
                     </Menu.Item>
                     }
                 </Menu>
-                <section className="section-navbar">
-                    <h1>Welcome to SuperIndex</h1>
-                    <div className="gorgeous"></div>
 
-                </section>
-                <Carousel   >
-                    <div><h3>1</h3></div>
-                    <div><h3>2</h3></div>
-                    <div><h3>3</h3></div>
-                    <div><h3>4</h3></div>
-                </Carousel>
             </div>
         )
     }

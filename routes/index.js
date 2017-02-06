@@ -10,7 +10,7 @@ router
     .get('/', function (req, res, next) {
         res.render('index');
     })
-    .post('/login',multipartMiddleware,function (req, res, next) {
+    .post('/login', multipartMiddleware, function (req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "POST");
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
@@ -33,9 +33,9 @@ router
             }
             if (docs) {
                 console.log(docs);
-                var data={
-                    role:docs.role,
-                    userName:docs.userName
+                var data = {
+                    role: docs.role,
+                    userName: docs.userName
                 };
                 res.json(data);
             }

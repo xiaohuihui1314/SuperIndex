@@ -1,9 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Form, Icon, Input, Button, Select} from 'antd';
+import {Form, Icon, Input, Button} from 'antd';
 const FormItem = Form.Item;
-// this.props.requireRequset(a);
 import * as loginAction from '../redux/actions/login';
 import {hashHistory,Link} from 'react-router';
 class LoginForm extends React.Component {
