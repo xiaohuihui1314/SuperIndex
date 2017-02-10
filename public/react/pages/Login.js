@@ -18,9 +18,10 @@ class LoginForm extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         console.log("componentWillReceiveProps1");
+        console.log(nextProps.postBy);
         console.log(nextProps.postBy.loginState);
-        if(nextProps.postBy.loginState){
-             const path = "/";
+        if(nextProps.postBy.loginState&&nextProps.postBy.userName!=null&&nextProps.postBy.userName!=undefined){
+            const path = "/";
              hashHistory.push(path);
         }
         console.log("componentWillReceiveProps2");

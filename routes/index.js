@@ -15,8 +15,6 @@ router
         res.header("Access-Control-Allow-Methods", "POST");
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
         res.header("Content-Type", "application/json;charset=utf-8");
-        console.log(req.body);
-        console.log(req.body.firstName);
         var userName = req.body.userName;
         var passWord = req.body.passWord;
         var cond = {
@@ -32,7 +30,9 @@ router
                 return;
             }
             if (docs) {
+                console.log("success!");
                 console.log(docs);
+                console.log(docs.userName);
                 var data = {
                     role: docs.role,
                     userName: docs.userName
