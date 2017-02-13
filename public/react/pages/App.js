@@ -10,7 +10,7 @@ import configureStore from '../redux/store/index';
 const store = configureStore();
 import {Router, Route, hashHistory} from 'react-router';
 ReactDOM.render(
-    (
+
         <Provider store={store}>
             <Router history={hashHistory}>
                 <Route path="/" component={Index}/>
@@ -18,7 +18,7 @@ ReactDOM.render(
                 <Route path="/register" component={NormalLoginForm}/>
             </Router>
          </Provider>
-    ),
+    ,
     document.getElementById("app"),()=> {
 
     }

@@ -42,6 +42,8 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015'],
                     plugins: [
+                        // "transform-decorators-legacy"
+                         "transform-object-assign",
                           ['import', [{libraryName: "antd", style: 'css'}]],
                         // ['import', [{libraryName: "antd", style: true}]],  // import less
                     ],
