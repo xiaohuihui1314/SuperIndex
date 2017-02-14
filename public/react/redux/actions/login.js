@@ -24,7 +24,6 @@ function fetchRequest(name) {
         return fetch("http://localhost:3000/login", {
             method: "POST",
             mode: 'cors',
-            cache: 'default',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },

@@ -18,9 +18,9 @@ class LoginForm extends React.Component {
     }
     componentWillReceiveProps(nextProps){
         console.log("componentWillReceiveProps1");
-        console.log(nextProps.postBy);
-        console.log(nextProps.postBy.loginState);
-        if(nextProps.postBy.loginState&&nextProps.postBy.userName!=null&&nextProps.postBy.userName!=undefined){
+        console.log(nextProps.loginReducer);
+        console.log(nextProps.loginReducer.loginState);
+        if(nextProps.loginReducer.loginState&&nextProps.loginReducer.userName!=null&&nextProps.loginReducer.userName!=undefined){
             const path = "/";
              hashHistory.push(path);
         }
@@ -58,11 +58,11 @@ const Login = Form.create()(LoginForm);
 function mapStateToProps(state) {
     console.log("statestatestatestatestatestatestatestatestatestatestatestatestate2");
     console.log(state);
-    const {postBy} =state;
+    const {loginReducer} =state;
 
     // const {isFetching,login: posts}=postBy["user"];
     return {
-        postBy,
+        loginReducer,
         // posts,
 
     }

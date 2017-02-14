@@ -17,7 +17,7 @@ class Index extends React.Component {
     render() {
 
         console.log(this.props);
-        const {loginState, postBy} =this.props;
+        const {loginState, loginReducer} =this.props;
         console.log(loginState);
        /* setInterval(() => {
             document.getElementsByClassName("gorgeous")[0].style.transform = "scaleX(." + Math.ceil(Math.random() * 10) + ")"
@@ -52,7 +52,7 @@ class Index extends React.Component {
                     }
                     {loginState &&
                     <Menu.Item style={{float: 'right'}}>
-                        <Icon type="user"/>{postBy.userName}
+                        <Icon type="user"/>{loginReducer.userName}
                     </Menu.Item>
                     }
                 </Menu>
@@ -62,9 +62,9 @@ class Index extends React.Component {
     }
 }
 function mapStateToProps(state) {
-    const {loginRequest, postBy} =state;
-    const {loginState, isFetching, items: posts}=postBy[loginRequest] || {
-        loginState: postBy.loginState,
+    const {loginRequest, loginReducer} =state;
+    const {loginState, isFetching, items: posts}=loginReducer[loginRequest] || {
+        loginState: loginReducer.loginState,
         isFetching: true,
         items: []
     };
@@ -72,7 +72,7 @@ function mapStateToProps(state) {
         loginRequest,
         loginState,
         isFetching,
-        postBy
+        loginReducer
     }
 }
 function select(dispatch) {
