@@ -2,25 +2,6 @@ import React from "react";
 import {Carousel} from 'antd';
 
 
-class SampleNextArrow extends React.Component {
-    render() {
-        console.log(this.props)
-        console.log("000")
-        return (
-            <div {...this.props} style={{display: 'block', background: 'red',width:50,height:50}}></div>
-
-        )
-    }
-}
-
-class SamplePrevArrow extends React.Component {
-    render() {
-        return (
-            <div {...this.props} style={{display: 'block', background: 'red',width:50,height:50}}></div>
-        )
-    }
-}
-
 
 class CarouselList extends React.Component {
     constructor(props) {
@@ -30,7 +11,6 @@ class CarouselList extends React.Component {
     }
 
     next() {
-        console.log(this);
         this.slider.refs.slick.slickNext()
     }
 
@@ -53,9 +33,8 @@ class CarouselList extends React.Component {
             },
             afterChange: function (currentSlide) {
                 console.log("afterChange:" + currentSlide);
-            },
-            nextArrow: <SampleNextArrow />,
-            prevArrow: <SamplePrevArrow />
+            }
+
         };
         let imgArray = [
             "https://t1.mmonly.cc//uploads/tu/sm/20151226/50.jpg",
@@ -78,7 +57,6 @@ class CarouselList extends React.Component {
                     <button className='button' onClick={this.previous}>Previous</button>
                     <button className='button' onClick={this.next}>Next</button>
                 </div>
-                <SampleNextArrow/>
             </div>
         );
     }

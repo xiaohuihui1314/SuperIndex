@@ -47,14 +47,20 @@ router
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "POST");
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
-        res.header("Content-Type", "application/json");
+        res.header("Content-Type", "application/json;charset=utf-8");
 
-        console.log(req.body);
-        console.log(req.query);
+        let body="";
+        req.on('data', function (data) {
+            body += data;
+        }).on('end', function () {
+            console.log(JSON.parse(body))
+        });
 
 
 
-        // res.json({a:1000,b:10});
+
+
+        res.json(body);
       /*  var userName = req.body.userName;
         var passWord = req.body.passWord;
         var user = new User({

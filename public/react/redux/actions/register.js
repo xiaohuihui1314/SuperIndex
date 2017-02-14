@@ -1,3 +1,4 @@
+
 export const REGISTE = "REGISTE";
 export const REGISTESTART = "REGISTESTART";
 export const REGISTEEND = "REGISTEEND";
@@ -22,17 +23,23 @@ function fetchRequest(name) {
     console.log(name);
     return dispatch=> {
         dispatch(startRegister(name));
+        let nameData =JSON.stringify(name);
+        console.log(nameData);
+
+
         return fetch("http://localhost:3000/register", {
             method: 'POST',
             mode: 'no-cors',
-            body: JSON.stringify({
-                name: 'abby',
-                psd: 111
-            }),
-            headers: { 'Content-Type': 'application/json' }
+            body: nameData,
+            headers: {
+                "Content-Type": 'application/json'
+            }
         })
-            .then(response => response.json())
-            .then(json => dispatch(endRegister(name,json)));
+            .then(res =>{
+                console.log( res )
+                console.log( res.json())
+            })
+            // .then(json => dispatch(endRegister(name,json)));
     }
 }
 // 触发获取数据

@@ -21,7 +21,7 @@ var User = new Schema({
     }
 
 });
-// 创建一个集合。
+/*// 创建一个集合。
 var UserId_Adds = new Schema({
     _id: String,
     test: {
@@ -40,7 +40,7 @@ User.statics.findAndModify = function (query, sort, doc, callback, options) {
 // 创建你的模型。
 var UserId_Add = mongoose.model('User', User);
 User.pre("save", true, function (err, next, callback) {
-   /* console.log(err)
+   /!* console.log(err)
     var _this = this;
     var _this_userId = null;
     UserId_Add.findAndModify(
@@ -63,8 +63,8 @@ User.pre("save", true, function (err, next, callback) {
                 _this.userId = _this_userId;
 
             }
-        });*/
+        });*!/
     next();
-});
+});*/
 
 mongoose.model("User", User);
