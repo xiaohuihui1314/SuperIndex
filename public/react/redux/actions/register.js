@@ -1,4 +1,4 @@
-
+import fetchSup from './jsonString';
 export const REGISTE = "REGISTE";
 export const REGISTESTART = "REGISTESTART";
 export const REGISTEEND = "REGISTEEND";
@@ -10,41 +10,33 @@ function startRegister(register) {
     }
 
 }
-function endRegister(register,json) {
+function endRegister(register, json) {
     return {
         type: REGISTEEND,
-        login: register,
-        loginData: json
+        register: register,
+        registerData: json
     }
 }
 
 // 远程获取数据
 function fetchRequest(name) {
     console.log(name);
-    return dispatch=> {
+    return dispatch => {
         dispatch(startRegister(name));
-        let nameData =JSON.stringify(name);
-        console.log(nameData);
-
-
-        return fetch("http://localhost:3000/register", {
+        return fetchSup({
+            url:"http://localhost:3000/register",
             method: 'POST',
-            mode: 'no-cors',
-            body: nameData,
-            headers: {
-                "Content-Type": 'application/json'
+            mode: 'cors',
+            body: name,
+            success:function (json) {
+                dispatch(endRegister(name, json));
             }
-        })
-            .then(res =>{
-                console.log( res )
-                console.log( res.json())
-            })
-            // .then(json => dispatch(endRegister(name,json)));
+        });
     }
 }
 // 触发获取数据
 export function requireRequset(name) {
-    return (dispatch)=> {
+    return (dispatch) => {
         dispatch(fetchRequest(name))
     }
 }

@@ -43,36 +43,30 @@ router
 
         });
     })
-    .post("/register",multipartMiddleware,function (req, res, next) {
+    .post("/register", function (req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Methods", "POST");
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
         res.header("Content-Type", "application/json;charset=utf-8");
-
-        let body="";
-        req.on('data', function (data) {
-            body += data;
-        }).on('end', function () {
-            console.log(JSON.parse(body))
-        });
-
-
-
-
-
-        res.json(body);
-      /*  var userName = req.body.userName;
-        var passWord = req.body.passWord;
-        var user = new User({
+        let userName = req.body.userName;
+        let passWord = req.body.passWord;
+        console.log(req.body);
+        let user = new User({
             userName: userName,
             passWord: passWord,
-            /!* createTime:new Date()*!/
+            /* createTime:new Date()*/
         });
-        console.log(new Date());
-        user.save(function (err) {
-            if (err) return next(err);
-            return res.json(user);
-        });*/
+        user.save(function (err, docs) {
+            if (err) {
+                let err = {
+                    state: -1,
+                    error: "用户名重复"
+                };
+                return res.json(err);
+            } else if (docs) {
+                return res.json(user);
+            }
 
+        });
     });
 module.exports = router;

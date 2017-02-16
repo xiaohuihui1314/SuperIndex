@@ -28,9 +28,15 @@ function fetchRequest(name) {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
             body: `userName=${name.userName}&passWord=${name.passWord}`
-        })
-            .then(response => response.json())
-            .then(json => dispatch(endLogin(name,json)));
+        }).then(function (res) {
+            if (res.ok) {
+                res.json().then(function (json) {
+                    dispatch(endLogin(name, json));
+                });
+            }
+        }).catch(function (e) {
+            console.log("系统繁忙~~");
+        });
     }
 }
 // 触发获取数据
