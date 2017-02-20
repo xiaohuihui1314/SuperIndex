@@ -8,6 +8,7 @@ class CarouselList extends React.Component {
         super(props);
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
+        this.fetchBtn = this.fetchBtn.bind(this);
     }
 
     next() {
@@ -17,7 +18,9 @@ class CarouselList extends React.Component {
     previous() {
         this.slider.refs.slick.slickPrev()
     }
+    fetchBtn(){
 
+    }
     render() {
         const settings = {
             autoplay: true,//是否自动播放
@@ -56,6 +59,9 @@ class CarouselList extends React.Component {
                 <div style={{textAlign: 'center'}}>
                     <button className='button' onClick={this.previous}>Previous</button>
                     <button className='button' onClick={this.next}>Next</button>
+                </div>
+                <div>
+                    <button type="button" onClick={this.fetchBtn}>点击获取</button>
                 </div>
             </div>
         );

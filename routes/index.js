@@ -1,10 +1,10 @@
 var express = require('express');
 var mongoose = require("mongoose");
 require("../mongodb/users/users");
-var User = mongoose.model("User");
-var router = express.Router();
-var multipart = require('connect-multiparty');
-var multipartMiddleware = multipart();
+const User = mongoose.model("User");
+const router = express.Router();
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
 const jwt = require('jsonwebtoken');
 /* GET home page. */
 router
@@ -34,9 +34,9 @@ router
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
         res.header("Content-Type", "application/json;charset=utf-8");
         console.log(req.body);
-        var userName = req.body.userName;
-        var passWord = req.body.passWord;
-        var cond = {
+        const userName = req.body.userName;
+        const passWord = req.body.passWord;
+        const cond = {
             $and: [
                 {"userName": userName},
                 {"passWord": passWord}
@@ -52,7 +52,8 @@ router
                 console.log("success!");
                 console.log(docs);
                 console.log(docs.userName);
-                var data = {
+                const data = {
+                    token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3QgVXNlciJ9.J6n4-v0I85zk9MkxBHroZ9ZPZEES-IKeul9ozxYnoZ8",
                     role: docs.role,
                     userName: docs.userName
                 };
