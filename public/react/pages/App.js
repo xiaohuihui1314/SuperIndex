@@ -20,6 +20,7 @@ ReactDOM.render(
          </Provider>
     ,
     document.getElementById("app"),()=> {
-
+        let token = localStorage.getItem('token');
+        console.log(token);
     }
 );

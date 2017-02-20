@@ -2,7 +2,7 @@ import fetchSup from './jsonString';
 export const REGISTE = "REGISTE";
 export const REGISTESTART = "REGISTESTART";
 export const REGISTEEND = "REGISTEEND";
-
+const jwtCode =require("jwt-decode");
 function startRegister(register) {
     return {
         type: REGISTESTART,
@@ -29,6 +29,7 @@ function fetchRequest(name) {
             mode: 'cors',
             body: name,
             success:function (json) {
+                console.log(jwtCode.json.token);
                 dispatch(endRegister(name, json));
             }
         });
