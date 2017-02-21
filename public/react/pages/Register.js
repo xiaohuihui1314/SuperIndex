@@ -1,33 +1,21 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { Form, Icon, Input, Button,Select} from 'antd';
 import * as registerAction from '../redux/actions/register'
-
 const FormItem = Form.Item;
 class Login extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this)
        this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.requireRequset(values);
-                console.log(this.props)
+               const {registerRequest} =this.props;
+                registerRequest.registerFetch(values);
             }
         });
     }
-
     render() {
-
         const { getFieldDecorator } = this.props.form;
-       /* const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '+86',
-        })(
-            <Select className="icp-selector">
-                <Option value="86">+86</Option>
-            </Select>
-        );*/
         return (
             <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                 <FormItem >
@@ -44,7 +32,6 @@ class Login extends React.Component {
                         <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
                     )}
                 </FormItem>
-
                {/* <FormItem>
                     {getFieldDecorator('phone', {
                         rules: [{ required: true, message: 'Please input your phone number!' }],
@@ -70,8 +57,9 @@ function mapStateToProps(state) {
         registerReducer
     }
 }
-function select(dispatch) {
-    return bindActionCreators(registerAction, dispatch)
-
+function registerDisProps(dispatch) {
+    return {
+        registerRequest: bindActionCreators(registerAction,dispatch)
+    }
 }
-export default connect(mapStateToProps, select)(NormalLoginForm);
+export default connect(mapStateToProps, registerDisProps)(NormalLoginForm);

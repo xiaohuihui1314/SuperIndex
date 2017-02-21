@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "app": "node ./bin/www",
-    "start": "webpack-dev-server --port 3050 --inline --hot --open --content-base ./views/ "
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "antd": "^2.5.3",

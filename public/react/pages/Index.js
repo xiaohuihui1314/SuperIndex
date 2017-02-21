@@ -1,24 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import { requireRequset} from '../redux/actions/login';
 import CarouselList from "./Carousel"
 import {Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class Index extends React.Component {
+    constructor(props) {
+        super(props);
+        this.fetchBtn = this.fetchBtn.bind(this);
+    }
     //初始化渲染后触发
     componentDidMount() {
-        const {loginRequest} = this.props;
-        // this.props.requireRequset(loginRequest);
-
+    }
+    fetchBtn(){
+        let token =localStorage.getItem("token");
+        this.props.testRequst(token)
     }
     render() {
-
-        console.log(this.props);
         const {loginState, loginReducer} =this.props;
-        console.log(loginState);
        /* setInterval(() => {
             document.getElementsByClassName("gorgeous")[0].style.transform = "scaleX(." + Math.ceil(Math.random() * 10) + ")"
         }, 120);*/
@@ -57,6 +58,9 @@ class Index extends React.Component {
                     }
                 </Menu>
                 <CarouselList/>
+                <div>
+                    <button type="button" onClick={this.fetchBtn}>点击获取</button>
+                </div>
             </div>
         )
     }
@@ -69,18 +73,11 @@ function mapStateToProps(state) {
         items: []
     };
     return {
-        loginRequest,
+
         loginState,
         isFetching,
         loginReducer
     }
 }
-function select(dispatch) {
-    return {
-        requireRequset: (e) => {
-            dispatch(requireRequset(e))
-        }
-    }
 
-}
-export default connect(mapStateToProps, select)(Index);
+export default connect(mapStateToProps)(Index);

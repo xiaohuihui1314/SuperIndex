@@ -1,6 +1,6 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import {Form, Icon, Input, Button} from 'antd';
 const FormItem = Form.Item;
 import * as loginAction from '../redux/actions/login';
@@ -10,24 +10,18 @@ class LoginForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.requireRequset(values);
-
+                const {loginRequest} =this.props;
+                loginRequest.loginFetch(values);
             }
         });
     }
     componentWillReceiveProps(nextProps){
-        console.log("componentWillReceiveProps1");
-        console.log(nextProps.loginReducer);
-        console.log(nextProps.loginReducer.loginState);
         if(nextProps.loginReducer.loginState&&nextProps.loginReducer.userName!=null&&nextProps.loginReducer.userName!=undefined){
             const path = "/";
              hashHistory.push(path);
         }
-        console.log("componentWillReceiveProps2");
     }
     render() {
-        console.log(this.props);
         const {getFieldDecorator} =this.props.form;
         return (
             <Form onSubmit={this.loginSubmit.bind(this)} className="login-form">
@@ -56,19 +50,21 @@ class LoginForm extends React.Component {
 }
 const Login = Form.create()(LoginForm);
 function mapStateToProps(state) {
-    console.log("statestatestatestatestatestatestatestatestatestatestatestatestate2");
-    console.log(state);
-    const {loginReducer} =state;
-
-    // const {isFetching,login: posts}=postBy["user"];
+    const {loginReducer } =state;
     return {
-        loginReducer,
-        // posts,
-
+        loginReducer
     }
 }
-function select(dispatch) {
-    return bindActionCreators(loginAction, dispatch)
-
+/*function loginDisProps(dispatch) {
+    return {
+        loginRequset: (e) => {
+            dispatch(loginAction.requireRequset(e))
+        }
+    }
+}*/
+function loginDisProps(dispatch) {
+    return {
+        loginRequest: bindActionCreators(loginAction,dispatch)
+    }
 }
-export default connect(mapStateToProps, select)(Login);
+export default connect(mapStateToProps, loginDisProps)(Login);

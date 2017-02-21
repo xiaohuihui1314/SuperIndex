@@ -36,7 +36,7 @@ function fetchRequest(name) {
     }
 }
 // 触发获取数据
-export function requireRequset(name) {
+export function registerFetch(name) {
     return (dispatch) => {
         dispatch(fetchRequest(name))
     }

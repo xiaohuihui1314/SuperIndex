@@ -49,9 +49,30 @@ function fetchRequest(name) {
 
     }
 }
+// 远程获取数据
+function test(token) {
+    return ()=> {
+        return fetchSup({
+            url:"http://localhost:3000/token",
+            method: 'get',
+            mode: 'cors',
+
+            success:function (json) {
+                console.log(json);
+                console.log(jwtCode(json.token));
+            }
+        });
+
+    }
+}
 // 触发获取数据
-export function requireRequset(name) {
+export function loginFetch(name) {
     return (dispatch)=> {
         dispatch(fetchRequest(name))
+    }
+}
+export  function testRequst(name) {
+    return(dispatch)=>{
+        dispatch(test(name))
     }
 }
