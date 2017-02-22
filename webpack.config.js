@@ -23,7 +23,7 @@ module.exports = {
                         // "transform-decorators-legacy"
                         "transform-object-assign",
                         ['import', [{libraryName: "antd", style: 'css'}]],
-                        // ['import', [{libraryName: "antd", style: true}]],  // import less
+                        //['import', [{libraryName: "antd", style: true}]],  // import less
                     ],
                 },
                 cacheDirectory: true,

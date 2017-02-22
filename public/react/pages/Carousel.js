@@ -28,12 +28,12 @@ class CarouselList extends React.Component {
             infinite: true,
             slidesToShow: 1,//一屏显示多少列
             slidesToScroll: 1,//每次播放多少列
-            beforeChange: function (currentSlide, nextSlide) {
+          /*  beforeChange: function (currentSlide, nextSlide) {
                 console.log("beforeChange:" + currentSlide, nextSlide);
             },
             afterChange: function (currentSlide) {
                 console.log("afterChange:" + currentSlide);
-            }
+            }*/
 
         };
         let imgArray = [

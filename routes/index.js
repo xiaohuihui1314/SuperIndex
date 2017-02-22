@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 router
     .get('/', function (req, res, next) {
         let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
-        let secretOrPrivateKey = "I am a goog man!" // 这是加密的key（密钥）
+        let secretOrPrivateKey = "I am a goog man!"; // 这是加密的key（密钥）
             let token = jwt.sign(content, secretOrPrivateKey, {
             expiresIn: 60 * 60 * 24  // 24小时过期
         });
@@ -34,6 +34,12 @@ router
         res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
         res.header("Content-Type", "application/json;charset=utf-8");
         console.log(req.body);
+        let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
+        let secretOrPrivateKey = "I am a goog man!"; // 这是加密的key（密钥）
+        let token = jwt.sign(content, secretOrPrivateKey, {
+            expiresIn: 60 * 60 * 24  // 24小时过期
+        });
+        console.log("token ：" + token);
         const userName = req.body.userName;
         const passWord = req.body.passWord;
         const cond = {
@@ -53,7 +59,7 @@ router
                 console.log(docs);
                 console.log(docs.userName);
                 const data = {
-                    token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3QgVXNlciJ9.J6n4-v0I85zk9MkxBHroZ9ZPZEES-IKeul9ozxYnoZ8",
+                    token:token,
                     role: docs.role,
                     userName: docs.userName
                 };

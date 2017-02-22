@@ -41,7 +41,6 @@ function fetchRequest(name) {
             success:function (json) {
                 console.log(json);
                 console.log(jwtCode(json.token));
-
                 dispatch(loginUserSuccess(json.token));
                 dispatch(endLogin(name, json));
             }
