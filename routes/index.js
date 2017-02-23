@@ -6,6 +6,26 @@ const router = express.Router();
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
 const jwt = require('jsonwebtoken');
+var redis = require("redis"),
+    client = redis.createClient();
+
+// if you'd like to select database 3, instead of 0 (default), call
+// client.select(3, function() { /* ... */ });
+
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+
+client.set("string key", "string val", redis.print);
+client.hset("hash key", "hashtest 1", "some value", redis.print);
+client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
+client.hkeys("hash key", function (err, replies) {
+    console.log(replies.length + " replies:");
+    replies.forEach(function (reply, i) {
+        console.log("    " + i + ": " + reply);
+    });
+    client.quit();
+});
 /* GET home page. */
 router.use( function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -34,7 +54,8 @@ router
         let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
         let secretOrPrivateKey = "I am a goog man!"; // 这是加密的key（密钥）
         let token = jwt.sign(content, secretOrPrivateKey, {
-            expiresIn: 60 * 60 * 24  // 24小时过期
+              expiresIn: 60
+            // expiresIn: 60 * 60 * 24  // 24小时过期
         });
         console.log("token ：" + token);
         const userName = req.body.userName;
