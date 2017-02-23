@@ -55,10 +55,9 @@ function test(token) {
             url:"http://localhost:3000/token",
             method: 'get',
             mode: 'cors',
-
+            credentials: 'include',
             success:function (json) {
                 console.log(json);
-                console.log(jwtCode(json.token));
             }
         });
 

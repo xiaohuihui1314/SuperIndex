@@ -6,6 +6,16 @@ const FormItem = Form.Item;
 import * as loginAction from '../redux/actions/login';
 import {hashHistory,Link} from 'react-router';
 class LoginForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.fetchBtn = this.fetchBtn.bind(this);
+    }
+
+    fetchBtn(){
+        const {loginRequest} =this.props;
+        loginRequest.testRequst()
+    }
+
     loginSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -43,6 +53,9 @@ class LoginForm extends React.Component {
                     <Button type="primary"  className="login-form-button" htmlType="submit">登录</Button>
                     <Link to="/">首页</Link>
                 </FormItem>
+                <div>
+                    <button type="button" onClick={this.fetchBtn}>点击获取</button>
+                </div>
             </Form>
 
         )

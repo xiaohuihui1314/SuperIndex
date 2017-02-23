@@ -7,17 +7,11 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class Index extends React.Component {
-    constructor(props) {
-        super(props);
-        this.fetchBtn = this.fetchBtn.bind(this);
-    }
+
     //初始化渲染后触发
     componentDidMount() {
     }
-    fetchBtn(){
-        let token =localStorage.getItem("token");
-        this.props.testRequst(token)
-    }
+
     render() {
         const {loginState, loginReducer} =this.props;
        /* setInterval(() => {
@@ -58,9 +52,6 @@ class Index extends React.Component {
                     }
                 </Menu>
                 <CarouselList/>
-                <div>
-                    <button type="button" onClick={this.fetchBtn}>点击获取</button>
-                </div>
             </div>
         )
     }

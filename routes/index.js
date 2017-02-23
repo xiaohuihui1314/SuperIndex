@@ -7,33 +7,30 @@ const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
 const jwt = require('jsonwebtoken');
 /* GET home page. */
+router.use( function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "POST");
+    res.header("Access-Control-Allow-Headers", "x-requested-with,content-type,authorization");
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
+
 router
     .get('/', function (req, res, next) {
-        let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
-        let secretOrPrivateKey = "I am a goog man!"; // 这是加密的key（密钥）
-            let token = jwt.sign(content, secretOrPrivateKey, {
-            expiresIn: 60 * 60 * 24  // 24小时过期
-        });
-        console.log("token ：" + token);
         res.render('index');
 
     })
     .get('/token', function (req, res, next) {
-        let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
-        let secretOrPrivateKey = "I am a goog man!" // 这是加密的key（密钥）
-        let token = jwt.sign(content, secretOrPrivateKey, {
-            expiresIn: 60 * 60 * 24  // 24小时过期
-        });
+        let token = req.headers['authorization'];
+        console.log(token);
+        let decoded = jwt.verify(token, 'I am a goog man!');
+        console.log(decoded);
         console.log("token ：" + token);
         res.json({code:200});
 
     })
     .post('/login', multipartMiddleware, function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "POST");
-        res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
-        res.header("Content-Type", "application/json;charset=utf-8");
-        console.log(req.body);
+
         let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
         let secretOrPrivateKey = "I am a goog man!"; // 这是加密的key（密钥）
         let token = jwt.sign(content, secretOrPrivateKey, {
@@ -69,10 +66,6 @@ router
         });
     })
     .post("/register", function (req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "POST");
-        res.header("Access-Control-Allow-Headers", "x-requested-with,content-type");
-        res.header("Content-Type", "application/json;charset=utf-8");
         let userName = req.body.userName;
         let passWord = req.body.passWord;
         console.log(req.body);
