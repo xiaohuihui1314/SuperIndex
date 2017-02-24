@@ -24,23 +24,15 @@ router
 
     })
     .get('/token', verifyToken, function (req, res, next) {
-    /*    let token = req.headers['authorization'];
+        /*    let token = req.headers['authorization'];
 
-        let decoded = jwt.verify(token, 'I am a good man!');
-        /!* let decoded = jwt.verify(token, 'I am a good man!');*!/
+         let decoded = jwt.verify(token, 'I am a good man!');
+         /!* let decoded = jwt.verify(token, 'I am a good man!');*!/
          console.log(decoded);*/
         res.json({code: 200});
 
     })
     .post('/login', multipartMiddleware, function (req, res, next) {
-
-        let content = {msg: "today  is  a  good  day"}; // 要生成token的主题信息
-        let secretOrPrivateKey = "I am a good man!"; // 这是加密的key（密钥）
-        let token = jwt.sign(content, secretOrPrivateKey, {
-            expiresIn: 30
-            // expiresIn: 60 * 60 * 24  // 24小时过期
-        });
-        console.log("token ：" + token);
         const userName = req.body.userName;
         const passWord = req.body.passWord;
         const cond = {
@@ -51,10 +43,19 @@ router
         };
         User.findOne(cond, function (err, docs) {
             if (err) {
-                console.log(err);
+                console.log("登录失败！");
                 return;
             }
             if (docs) {
+                let content = {
+                    userName: docs.userName
+                }; // 要生成token的主题信息
+                let secretOrPrivateKey = "I am a good man!"; // 这是加密的key（密钥）
+                let token = jwt.sign(content, secretOrPrivateKey, {
+                    expiresIn: 30 * 10
+                    // expiresIn: 60 * 60 * 24  // 24小时过期
+                });
+                console.log("token ：" + token);
                 const data = {
                     token: token,
                     role: docs.role,
