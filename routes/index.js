@@ -24,8 +24,8 @@ router
 
     })
     .get('/token', verifyToken, function (req, res, next) {
+        console.log("9999999");
         /*    let token = req.headers['authorization'];
-
          let decoded = jwt.verify(token, 'I am a good man!');
          /!* let decoded = jwt.verify(token, 'I am a good man!');*!/
          console.log(decoded);*/

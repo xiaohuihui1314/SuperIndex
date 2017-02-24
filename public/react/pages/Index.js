@@ -7,11 +7,9 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class Index extends React.Component {
-
     //初始化渲染后触发
     componentDidMount() {
     }
-
     render() {
         const {loginState, loginReducer} =this.props;
        /* setInterval(() => {
@@ -64,7 +62,6 @@ function mapStateToProps(state) {
         items: []
     };
     return {
-
         loginState,
         isFetching,
         loginReducer
