@@ -3,7 +3,7 @@ export const LOGINSTART = "LOGINSTART";
 export const LOGINEND = "LOGINEND";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 import fetchSup from './jsonString';
-const jwtCode =require("jwt-decode");
+
 function startLogin(login) {
     return {
         type: LOGINSTART,
@@ -40,7 +40,7 @@ function fetchRequest(name) {
             body: name,
             success:function (json) {
                 console.log(json);
-                console.log(jwtCode(json.token));
+
                 dispatch(loginUserSuccess(json.token));
                 dispatch(endLogin(name, json));
             }

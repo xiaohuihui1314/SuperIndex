@@ -1,6 +1,5 @@
 const client = require('./redis').client,
-    jwt = require('jsonwebtoken'),
-    TOKEN_EXPIRATION = 60;
+    TOKEN_EXPIRATION = 20;
 exports.expireToken = function (req, res, next) {
     let token = req.headers['authorization'];
     if (token != null) {
@@ -12,29 +11,21 @@ exports.expireToken = function (req, res, next) {
     next();
 };
 exports.loginSetToken = function (content) {
-    let secretOrPrivateKey = 'I am a good man!';
-    let token = jwt.sign(content, secretOrPrivateKey, {
-        expiresIn: 300
-        // expiresIn: 60 * 60 * 24  // 24小时过期
-    });
-    client.set(token, content.userName);
-    client.get(token,function (err, reply) {
-        console.log("err "+err);
-        console.log("reply "+reply);
-    });
+    let token = "5a4sd4a6sdasdasdasd";
+    client.hmset(token, content);
+    client.expire(token, TOKEN_EXPIRATION);
     return token;
 };
 exports.verifyToken = function (req, res, next) {
     let token = req.headers['authorization'];
-    let decoded = jwt.verify(token, 'I am a good man!', function (err, decoded) {
+    client.hgetall(token, function (err, reply) {
         if (err) {
-            console.log(err.name);
-            console.log(err.message);
-            console.log(err.expiredAt);
-            res.sendStatus(500);
-        }else {
-            console.log("decoded"+decoded);
+            console.log("err " + err);
+        } else if (reply) {
+            client.expire(token, TOKEN_EXPIRATION);
             next();
+        }else {
+            console.log("token已过期！");
         }
     });
 };
