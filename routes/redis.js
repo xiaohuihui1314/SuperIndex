@@ -7,5 +7,4 @@ client.on('connect', function () {
     console.log('Redis is ready');
 });
 
-exports.redis = redis;
 exports.client = client;

@@ -3,10 +3,7 @@ const express = require('express'),
     mongoose = require("mongoose"),
     User = mongoose.model("User"),
     router = express.Router(),
-    multipart = require('connect-multiparty'),
-    multipartMiddleware = multipart(),
-    jwt = require('jsonwebtoken'),
-    verifyToken = require('./token').verifyToken;
+    token = require("./token");
 
 /* GET home page. */
 router.use(function (req, res, next) {
@@ -16,23 +13,14 @@ router.use(function (req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
-
-
 router
     .get('/', function (req, res, next) {
         res.render('index');
-
     })
-    .get('/token', verifyToken, function (req, res, next) {
-        console.log("9999999");
-        /*    let token = req.headers['authorization'];
-         let decoded = jwt.verify(token, 'I am a good man!');
-         /!* let decoded = jwt.verify(token, 'I am a good man!');*!/
-         console.log(decoded);*/
+    .get('/token', token.verifyToken, function (req, res, next) {
         res.json({code: 200});
-
     })
-    .post('/login', multipartMiddleware, function (req, res, next) {
+    .post('/login', function (req, res, next) {
         const userName = req.body.userName;
         const passWord = req.body.passWord;
         const cond = {
@@ -49,15 +37,9 @@ router
             if (docs) {
                 let content = {
                     userName: docs.userName
-                }; // 要生成token的主题信息
-                let secretOrPrivateKey = "I am a good man!"; // 这是加密的key（密钥）
-                let token = jwt.sign(content, secretOrPrivateKey, {
-                    expiresIn: 30 * 10
-                    // expiresIn: 60 * 60 * 24  // 24小时过期
-                });
-                console.log("token ：" + token);
+                };
                 const data = {
-                    token: token,
+                    token: token.loginSetToken(content),
                     role: docs.role,
                     userName: docs.userName
                 };
