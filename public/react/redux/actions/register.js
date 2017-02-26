@@ -1,7 +1,6 @@
 export const REGISTE = "REGISTE";
 export const REGISTESTART = "REGISTESTART";
 export const REGISTEEND = "REGISTEEND";
-const jwtCode =require("jwt-decode");
 import fetchSup from './jsonString';
 function startRegister(register) {
     return {

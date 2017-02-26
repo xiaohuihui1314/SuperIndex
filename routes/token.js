@@ -1,5 +1,5 @@
 const client = require('./redis').client,
-    TOKEN_EXPIRATION = 20;
+    TOKEN_EXPIRATION = 10;
 exports.expireToken = function (req, res, next) {
     let token = req.headers['authorization'];
     if (token != null) {
@@ -21,11 +21,11 @@ exports.verifyToken = function (req, res, next) {
     client.hgetall(token, function (err, reply) {
         if (err) {
             console.log("err " + err);
-        } else if (reply) {
+        } else if (reply == null) {
+            console.log("token已过期！");
+        } else {
             client.expire(token, TOKEN_EXPIRATION);
             next();
-        }else {
-            console.log("token已过期！");
         }
     });
 };

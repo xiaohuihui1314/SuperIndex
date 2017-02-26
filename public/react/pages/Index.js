@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import CarouselList from "./Carousel"
+import CardList from "./Card"
+import Modal from "./Modal"
 import {Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -40,7 +42,9 @@ class Index extends React.Component {
                         <Menu.Item style={{float: 'right'}}>
                             <Link to="/login">登录</Link>
                         </Menu.Item>
-
+                        <Menu.Item style={{float: 'right'}}>
+                            <Icon type="user"/>我的主页
+                        </Menu.Item>
                     </Menu>
                     }
                     {loginState &&
@@ -49,7 +53,9 @@ class Index extends React.Component {
                     </Menu.Item>
                     }
                 </Menu>
+                <Modal/>
                 <CarouselList/>
+                <CardList/>
             </div>
         )
     }

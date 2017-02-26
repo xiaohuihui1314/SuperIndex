@@ -30,10 +30,10 @@ module.exports = {
                 exclude:'/node_modules/'
             },
             {test: /\.scss$/, loader: 'style!css!sass', exclude:'/node_modules/'},
-            {test: /\.css$/, loaders: ['style', 'css'], exclude:'/node_modules/'},
+            {test: /\.css$/, loaders: ['style', 'css']},
             {test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/, loader: 'file-loader?name=[hash].[ext]', exclude:'/node_modules/'},
             {test: /\.(png|jpg)$/, loader: 'url?limit=819200&name=[hash].[ext]', exclude:'/node_modules'},
-            {test: /\.less$/, loaders: "style!css!less",exclude:'/node_modules/'},
+            {test: /\.less$/, loaders: "style!css!less"},
         ]
     },
     resolve: {
