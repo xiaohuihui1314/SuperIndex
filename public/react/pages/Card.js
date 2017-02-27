@@ -1,6 +1,4 @@
-import React from 'react';
 import { Row,Col,Card } from 'antd';
-
 class CardList extends React.Component{
     render(){
         return(

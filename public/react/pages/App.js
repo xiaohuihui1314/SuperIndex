@@ -1,6 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Index from './Index';
+import LayoutList from './LayoutList';
 import Login from './Login';
 import NormalLoginForm from './Register';
 import '../css/index';
@@ -11,7 +9,7 @@ import {Router, Route, hashHistory} from 'react-router';
 ReactDOM.render(
         <Provider store={store}>
             <Router history={hashHistory}>
-                <Route path="/" component={Index}/>
+                <Route path="/" component={LayoutList}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={NormalLoginForm}/>
             </Router>

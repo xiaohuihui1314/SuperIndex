@@ -1,4 +1,3 @@
-import React from 'react';
 import { Modal, Button } from 'antd';
 
 class Test extends React.Component{

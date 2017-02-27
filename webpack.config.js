@@ -1,8 +1,10 @@
 /**
  * Created by Administrator on 2016/10/26.
  */
-const webpack = require('webpack');
-module.exports = {
+const webpack = require('webpack'),
+    ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const config = {
     entry: {  //页面入口文件配置
         index: './public/react/pages/App.js'
     },
@@ -30,10 +32,10 @@ module.exports = {
                 exclude:'/node_modules/'
             },
             {test: /\.scss$/, loader: 'style!css!sass', exclude:'/node_modules/'},
-            {test: /\.css$/, loaders: ['style', 'css']},
+            {test: /\.css$/,  loader: ExtractTextPlugin.extract('style', 'css'),exclude:'/node_modules/'},
             {test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/, loader: 'file-loader?name=[hash].[ext]', exclude:'/node_modules/'},
             {test: /\.(png|jpg)$/, loader: 'url?limit=819200&name=[hash].[ext]', exclude:'/node_modules'},
-            {test: /\.less$/, loaders: "style!css!less"},
+            {test: /\.less$/, loaders: "style!css!less",exclude:'/node_modules/'},
         ]
     },
     resolve: {
@@ -52,6 +54,21 @@ module.exports = {
                 NODE_ENV: '"production"'
             }
         }),
-        new webpack.HotModuleReplacementPlugin()//热加载
+        //压缩css文件
+        new ExtractTextPlugin('style.css'),
+        //热加载
+        new webpack.HotModuleReplacementPlugin(),
+        //自动注入库定义
+        new webpack.ProvidePlugin({
+            'React': 'react',
+            'ReactDOM': 'react-dom'
+        }),
+        //压缩打包文件
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
     ]
 };
+module.exports =config;
