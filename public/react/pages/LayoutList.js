@@ -1,6 +1,6 @@
 import {Layout} from 'antd';
-import MenuList  from './Menu';
-import SliderWrap  from './Sider';
+import MenuList  from './NavPage/Menu';
+import SliderWrap  from './SliderPage/Sider';
 import Login  from './Login';
 const {Header, Footer, Sider, Content} = Layout;
 
