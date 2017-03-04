@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Form, Icon, Input, Button} from 'antd';
 const FormItem = Form.Item;
-import * as loginAction from '../redux/actions/login';
+import * as loginAction from '../../../redux/actions/login';
 import {hashHistory,Link} from 'react-router';
 class LoginForm extends React.Component {
     constructor(props) {
@@ -79,4 +79,4 @@ function loginDisProps(dispatch) {
         loginRequest: bindActionCreators(loginAction,dispatch)
     }
 }
-export default connect(mapStateToProps, loginDisProps)(Login);
+module.exports =connect(mapStateToProps, loginDisProps)(Login);

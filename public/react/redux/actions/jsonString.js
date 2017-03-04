@@ -12,7 +12,7 @@ const jsonString = function jsonString(o) {
     }
     return params.join('&');
 };
-const fetchSup = function fetchSup(fetchObj) {
+const fetchSup = (fetchObj)=> {
     if (typeof  fetchObj != "object" || fetchObj instanceof Array) {
         return console.log("不是对象类型！");
     }

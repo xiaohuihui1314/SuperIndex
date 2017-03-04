@@ -91,3 +91,14 @@
     height: auto;
     padding:0;
 }
+
+.ant-table-tbody>tr>td, .ant-table-thead>tr>th{
+    word-break: normal !important;
+}
+.editable-row-text {
+    padding: 5px;
+}
+
+.editable-row-operations a {
+    margin-right: 8px;
+}

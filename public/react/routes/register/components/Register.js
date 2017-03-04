@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import { Form, Icon, Input, Button,Select} from 'antd';
-import * as registerAction from '../redux/actions/register'
+import { Form, Icon, Input, Button} from 'antd';
+import * as registerAction from '../../../redux/actions/register'
 const FormItem = Form.Item;
 class Login extends React.Component {
     handleSubmit(e) {
@@ -61,4 +61,4 @@ function registerDisProps(dispatch) {
         registerRequest: bindActionCreators(registerAction,dispatch)
     }
 }
-export default connect(mapStateToProps, registerDisProps)(NormalLoginForm);
+module.exports = connect(mapStateToProps, registerDisProps)(NormalLoginForm);
