@@ -11,7 +11,7 @@ import App from '../pages/App'
             require('./redirect'),
         ]
     } ]
-}
+};
 export {
     rootRoute as default
 }

@@ -15,6 +15,7 @@ class App extends React.Component {
 
     onCollapse(collapsed) {
         console.log(collapsed);
+        console.log(this.state);
         this.setState({
             collapsed,
             mode: collapsed ? 'vertical' : 'inline',
@@ -31,15 +32,16 @@ class App extends React.Component {
                     <Sider collapsible
                            collapsed={this.state.collapsed}
                            onCollapse={this.onCollapse}
+                           id="leftSide"
                     >
-                        <SliderWrap/>
+                        <SliderWrap mode={this.state.mode}/>
                     </Sider>
                     <Layout>
                         <Header>
                             <MenuList/>
                         </Header>
                         <Content>
-                                {  this.props.children|| <h1>hello world!</h1>}
+                            {  this.props.children || <h1>hello world!</h1>}
                         </Content>
                         <Footer>Footer</Footer>
                     </Layout>
