@@ -4,7 +4,6 @@ import {Provider} from 'react-redux';
 import configureStore from './redux/store/index';
 const store = configureStore();
 import {Router, hashHistory} from 'react-router';
-
 ReactDOM.render(
     <Provider store={store}>
         <Router history={hashHistory}

@@ -3,16 +3,18 @@
  */
 const webpack = require('webpack'),
     path = require("path"),
-    ExtractTextPlugin = require("extract-text-webpack-plugin");
+    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    WebpackMd5Hash = require('webpack-md5-hash');
 
 const config = {
     entry: {  //页面入口文件配置
-        index: './public/react/index.js'
+        index: './public/react/index.js',
+        vendor:["react"]
     },
     output: { //入口文件输出配置
         path: path.join(__dirname, './js/'),
         filename: '[name].js',
-        // chunkFilename: '[name].[chunkhash:5].chunk.js'
+        chunkFilename: '[name].[chunkhash:5].chunk.js'
     },
     watch: true,//监听改变的文件
     devtool: 'source-map',//调试
@@ -69,12 +71,19 @@ const config = {
             'React': 'react',
             'ReactDOM': 'react-dom'
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            filename: "commonFun.js"
+        }),
         //压缩打包文件
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
             }
         }),
+        new WebpackMd5Hash()
+        //允许错误不打断程序
+        // new webpack.NoErrorsPlugin()
     ]
 };
 module.exports = config;
