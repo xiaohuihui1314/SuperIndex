@@ -4,20 +4,25 @@
 const webpack = require('webpack'),
     path = require("path"),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    WebpackMd5Hash = require('webpack-md5-hash');
+    WebpackMd5Hash = require('webpack-md5-hash'),
+    AssetsPlugin = require('assets-webpack-plugin');
 
 const config = {
     entry: {  //页面入口文件配置
         index: './public/react/index.js',
-        vendor:["react"]
+        public: [
+            "react",
+            'react-dom'
+        ]
     },
     output: { //入口文件输出配置
-        path: path.join(__dirname, './js/'),
+        path: path.join(__dirname, './public/assets/'),
         filename: '[name].js',
-        chunkFilename: '[name].[chunkhash:5].chunk.js'
+        // chunkFilename: '[name].[chunkhash:5].chunk.js'
+        chunkFilename: '[name].min.js'
     },
     watch: true,//监听改变的文件
-    devtool: 'source-map',//调试
+    // devtool: 'source-map',//调试
     module: {
         loaders: [ //加载器配置
             {
@@ -63,7 +68,7 @@ const config = {
             }
         }),
         //压缩css文件
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('public/style.css'),
         //热加载
         new webpack.HotModuleReplacementPlugin(),
         //自动注入库定义
@@ -72,8 +77,8 @@ const config = {
             'ReactDOM': 'react-dom'
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            filename: "commonFun.js"
+            name: "public",
+            filename: "public/commonFun.js"
         }),
         //压缩打包文件
         new webpack.optimize.UglifyJsPlugin({
@@ -81,7 +86,12 @@ const config = {
                 warnings: false
             }
         }),
-        new WebpackMd5Hash()
+        new WebpackMd5Hash(),
+        new AssetsPlugin({
+            filename: './public/assets/assets-map.json',
+            update: true,
+            prettyPrint: true
+        })
         //允许错误不打断程序
         // new webpack.NoErrorsPlugin()
     ]

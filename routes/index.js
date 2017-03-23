@@ -6,13 +6,13 @@ const express = require('express'),
     token = require("./token");
 
 /* GET home page. */
-router.use(function (req, res, next) {
+/*router.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "POST");
     res.header("Access-Control-Allow-Headers", "x-requested-with,content-type,Authorization");
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
-});
+});*/
 router
     .get('/', function (req, res, next) {
         res.render('index');
