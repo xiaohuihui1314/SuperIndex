@@ -5,8 +5,8 @@ const webpack = require('webpack'),
     path = require("path"),
     ExtractTextPlugin = require("extract-text-webpack-plugin"),
     WebpackMd5Hash = require('webpack-md5-hash'),
-    AssetsPlugin = require('assets-webpack-plugin');
-
+    AssetsPlugin = require('assets-webpack-plugin'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
     entry: {  //页面入口文件配置
         index: './public/react/index.js',
@@ -16,10 +16,10 @@ const config = {
         ]
     },
     output: { //入口文件输出配置
-        path: path.join(__dirname, './public/assets/'),
-        filename: '[name].js',
-        // chunkFilename: '[name].[chunkhash:5].chunk.js'
-        chunkFilename: '[name].min.js'
+        path: path.join(__dirname, './public/assets/version-[hash:8]/'),
+        // filename: 'js/[name].[hash:8].js',
+        filename: 'js/[name].[chunkhash:8].js',
+        chunkFilename: '[name].[chunkhash:8][id].js'
     },
     watch: true,//监听改变的文件
     // devtool: 'source-map',//调试
@@ -55,7 +55,7 @@ const config = {
         extensions: ['', '.js', '.json', '.css', '.scss', '.sass', ".less"],
     },
     devServer: {
-        contentBase: './views/', //静态资源的目录 相对路径,相对于当前路径 默认为当前config所在的目录
+        contentBase: './public/assets/', //静态资源的目录 相对路径,相对于当前路径 默认为当前config所在的目录
         hot: true,//自动刷新
         inline: true,
         open: true,
@@ -67,8 +67,17 @@ const config = {
                 NODE_ENV: '"production"'
             }
         }),
+        new HtmlWebpackPlugin({
+            filename:'index.html',    //生成的html存放路径，相对于 path
+            template:'./views/index.html',
+            minify: {    //压缩HTML文件
+                removeComments: false,    //移除HTML中的注释
+                collapseWhitespace: false    //删除空白符与换行符
+            }
+
+        }),
         //压缩css文件
-        new ExtractTextPlugin('public/style.css'),
+        new ExtractTextPlugin('public/[name].[contenthash:8].css'),
         //热加载
         new webpack.HotModuleReplacementPlugin(),
         //自动注入库定义
@@ -78,7 +87,7 @@ const config = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "public",
-            filename: "public/commonFun.js"
+            filename: "public/commonFun..js"
         }),
         //压缩打包文件
         new webpack.optimize.UglifyJsPlugin({

@@ -12,6 +12,7 @@ ReactDOM.render(
     document.getElementById("app"), () => {
         let token = localStorage.getItem('token');
         console.log(token);
+        console.log("hello world!!!");
 
     }
 );

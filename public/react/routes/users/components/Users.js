@@ -64,17 +64,17 @@ class EditableTable extends React.Component {
         this.columns = [{
             title: 'name',
             dataIndex: 'name',
-            width: '55%',
+            width: '550%',
             render: (text, record, index) => this.renderColumns(this.state.data, index, 'name', text),
         }, {
             title: 'age',
             dataIndex: 'age',
-            width: '15%',
+            width: '150%',
             render: (text, record, index) => this.renderColumns(this.state.data, index, 'age', text),
         }, {
             title: 'address',
             dataIndex: 'address',
-            width: '40%',
+            width: '400%',
             render: (text, record, index) => this.renderColumns(this.state.data, index, 'address', text),
         }, {
             title: 'operation',
