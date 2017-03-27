@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "app": "node ./bin/www",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack --config webpack.config.build.js"
   },
   "dependencies": {
     "antd": "^2.5.3",

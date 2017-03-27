@@ -26,7 +26,7 @@ class Login extends React.Component {
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('passWord', {
-                        rules: [{ required: true, message: '请输入密码1!' }],
+                        rules: [{ required: true, message: '请输入密码!' }],
                     })(
                         <Input addonBefore={<Icon type="lock" />} type="password" placeholder="Password" />
                     )}
