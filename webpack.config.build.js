@@ -76,6 +76,12 @@ const config = {
                 collapseWhitespace: true    //删除空白符与换行符
             }
         }),
+        // 提供公共代码
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "public",
+            filename: "public/commonFun..js",
+            minChunks: Infinity //提取所有entry依赖模块
+        }),
         //压缩css文件
         new ExtractTextPlugin('public/[name].[contenthash:8].css',{
             allChunks:true,//把所有css打包一起
@@ -86,12 +92,7 @@ const config = {
             'React': 'react',
             'ReactDOM': 'react-dom'
         }),
-        // 提供公共代码
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "public",
-            filename: "public/commonFun..js",
-            minChunks: 3//提取依赖关系
-        }),
+
         // //压缩打包文件
         new webpack.optimize.UglifyJsPlugin({
             compress: {
