@@ -17,6 +17,7 @@ const config = {
     },
     output: { //入口文件输出配置
         path: path.join(__dirname, './public/assets/version-[hash:8]/'),
+        publicpath:"../",
         // filename: 'js/[name].[hash:8].js',
         filename: 'js/[name].[chunkhash:8].js',
         chunkFilename: '[name].[chunkhash:8][id].js'
@@ -43,10 +44,10 @@ const config = {
             {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader","css-loader"), exclude: '/node_modules/'},
             {
                 test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
-                loader: 'file-loader?name=[hash].[ext]',
+                loader: 'url?name=/antd_font/[hash].[ext]',
                 exclude: '/node_modules/'
-            },
-            {test: /\.(png|jpg)$/, loader: 'url?limit=819200&name=[hash].[ext]', exclude: '/node_modules'},
+    },
+            {test: /\.(png|jpg)$/, loader: 'url?limit=8192&name=images/[hash].[ext]', exclude: '/node_modules'},
             {test: /\.less$/, loaders: "style!css!less", exclude: '/node_modules/'},
         ]
     },
